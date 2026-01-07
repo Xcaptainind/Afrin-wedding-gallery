@@ -24,7 +24,6 @@
             color: var(--royal-emerald); 
             font-family: 'Inter', sans-serif; 
             margin: 0; padding: 0; line-height: 1.6;
-            /* Darkened Geometric Pattern */
             background-image: radial-gradient(var(--metallic-gold) 1.2px, transparent 1.2px), radial-gradient(var(--metallic-gold) 1.2px, var(--bg-silk) 1.2px);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
@@ -36,8 +35,8 @@
         .couple-names { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--royal-emerald); }
         h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 8vw, 2.2rem); font-weight: 400; font-style: italic; margin: 0; letter-spacing: -0.5px; }
         .divider { width: 100px; height: 1.5px; background: linear-gradient(90deg, transparent, var(--bright-gold), transparent); margin: 15px auto; }
+        .dua { font-family: 'Playfair Display', serif; color: var(--bright-gold); font-size: 0.9rem; font-style: italic; margin-top: 10px; }
 
-        /* STICKY SYNC BAR */
         .sticky-actions {
             position: sticky; top: 0; z-index: 1000; padding: 15px 0; text-align: center;
             background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -48,11 +47,8 @@
             background: var(--royal-emerald); border: 1px solid var(--bright-gold); color: var(--bright-gold);
             padding: 10px 24px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; box-shadow: 4px 4px 0px var(--bright-gold); font-weight: 600;
-            transition: all 0.2s;
         }
-        #syncBtn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px; }
 
-        /* LIGHTWEIGHT GRID */
         #gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -69,22 +65,27 @@
             border: 1px solid var(--bright-gold);
             overflow: hidden;
             cursor: pointer;
-            animation: fadeIn 0.6s ease-out forwards;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         .thumb-card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* PRO MODAL VIEW */
+        /* FIXED: SCROLLABLE PRO MODAL VIEW */
         #modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: radial-gradient(circle at center, #085a4b 0%, #03241e 100%);
             z-index: 2000;
+            overflow-y: auto; /* Allows scrolling if photo is tall or screen is small */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-content-wrapper {
+            min-height: 100%;
+            display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            touch-action: none;
+            justify-content: center;
+            padding: 40px 10px;
         }
 
         .spinner {
@@ -93,42 +94,42 @@
             border-radius: 50%;
             width: 40px; height: 40px;
             animation: spin 0.8s linear infinite;
-            position: absolute;
+            position: fixed; top: 50%; left: 50%;
+            margin: -20px 0 0 -20px;
             z-index: 2004;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         #modalImg {
-            max-width: 98%; max-height: 78vh;
+            max-width: 98%;
+            height: auto;
+            max-height: 70vh;
             object-fit: contain;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             border: 1px solid rgba(212, 175, 55, 0.2);
             opacity: 0;
             transform: scale(0.98);
             transition: opacity 0.4s ease, transform 0.4s ease;
-            z-index: 2005;
         }
 
-        /* Glassmorphism Navigation */
         .modal-nav {
             width: 100%; display: flex; justify-content: space-between;
-            padding: 0 10px; position: absolute; top: 50%; transform: translateY(-50%);
+            padding: 0 10px; position: fixed; top: 50%; transform: translateY(-50%);
             z-index: 2010; pointer-events: none;
         }
         .nav-arrow {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             color: var(--bright-gold); border: 1px solid rgba(212, 175, 55, 0.3);
-            width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem;
+            width: 48px; height: 48px; border-radius: 50%; font-size: 1.5rem;
             cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center;
         }
 
-        /* Pro Footer Actions */
         .modal-footer {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 40px 20px env(safe-area-inset-bottom);
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            text-align: center; z-index: 2010;
+            margin-top: 30px;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 20px;
         }
         .modal-dl-btn {
             background: var(--bright-gold); color: var(--royal-emerald);
@@ -137,9 +138,10 @@
             display: inline-block; border-radius: 4px;
         }
         .close-gallery {
-            display: block; margin: 15px auto 0; background: none; border: none;
+            display: block; margin: 20px auto 0; background: none; border: none;
             color: #fff; font-size: 0.65rem; text-transform: uppercase;
-            letter-spacing: 3px; opacity: 0.6; cursor: pointer;
+            letter-spacing: 3px; opacity: 0.7; cursor: pointer;
+            padding: 10px;
         }
 
         #topBtn { position: fixed; bottom: 30px; right: 20px; background: var(--royal-emerald); color: var(--bright-gold); border: 1px solid var(--bright-gold); width: 40px; height: 40px; display: none; z-index: 100; border-radius: 50%; }
@@ -152,7 +154,8 @@
         <div class="couple-names">Afrin & Riyaz</div>
         <h1>Wedding Photo Collection</h1>
         <div class="divider"></div>
-        <p style="color: var(--bright-gold); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px;">Swipe to browse • Tap to download</p>
+        <p class="subtitle" style="font-size: 0.7rem; color: var(--bright-gold); letter-spacing: 3px; text-transform: uppercase;">Barakallahu Lakum</p>
+        <div class="dua">May Allah bless this union with love and happiness</div>
     </header>
 
     <div class="sticky-actions">
@@ -163,15 +166,20 @@
 
     <div id="modal">
         <div class="spinner" id="modalLoader"></div>
+        
         <div class="modal-nav">
-            <button class="nav-arrow" onclick="event.stopPropagation(); navPhotos(1)">‹</button>
-            <button class="nav-arrow" onclick="event.stopPropagation(); navPhotos(-1)">›</button>
+            <button class="nav-arrow" onclick="navPhotos(1)">‹</button>
+            <button class="nav-arrow" onclick="navPhotos(-1)">›</button>
         </div>
-        <img id="modalImg" src="" alt="Wedding" 
-             onload="this.style.opacity=1; this.style.transform='scale(1)'; document.getElementById('modalLoader').style.display='none';">
-        <div class="modal-footer">
-            <a id="downloadLink" href="#" class="modal-dl-btn" target="_blank">Download Image</a>
-            <button onclick="closeModal()" class="close-gallery">Close Gallery</button>
+
+        <div class="modal-content-wrapper" id="modalScrollArea">
+            <img id="modalImg" src="" alt="Wedding" 
+                 onload="this.style.opacity=1; this.style.transform='scale(1)'; document.getElementById('modalLoader').style.display='none';">
+            
+            <div class="modal-footer">
+                <a id="downloadLink" href="#" class="modal-dl-btn" target="_blank">Download Image</a>
+                <button onclick="closeModal()" class="close-gallery">Back to Grid</button>
+            </div>
         </div>
     </div>
 
@@ -190,25 +198,19 @@
         async function fetchPhotos() {
             const btn = document.getElementById('syncBtn');
             btn.innerText = "Syncing...";
-            
             const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'&fields=files(id,name,createdTime)&orderBy=createdTime desc&key=${API_KEY}`;
             
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
                 if (data.files) {
                     const newItems = data.files.filter(f => !displayedIds.has(f.id));
                     allPhotos = [...newItems, ...allPhotos];
-                    
                     newItems.reverse().forEach(file => {
                         displayedIds.add(file.id);
                         const thumbCard = document.createElement('div');
                         thumbCard.className = 'thumb-card';
-                        
-                        // Optimized w400 thumbnails for the grid
-                        const thumbUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`;
-                        
+                        const thumbUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w300`;
                         thumbCard.innerHTML = `<img src="${thumbUrl}" alt="Wedding" loading="lazy">`;
                         thumbCard.onclick = () => {
                             currentIndex = allPhotos.findIndex(p => p.id === file.id);
@@ -218,15 +220,12 @@
                     });
                 }
                 btn.innerText = "Check for New Moments";
-            } catch (e) { 
-                btn.innerText = "Connection Error"; 
-            }
+            } catch (e) { btn.innerText = "Error - Try Again"; }
         }
 
         function updateModal() {
             const file = allPhotos[currentIndex];
-            // Pro w1600 preview for the Modal
-            const fullUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1600`;
+            const fullUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1400`;
             const dlUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
             
             const img = document.getElementById('modalImg');
@@ -236,7 +235,8 @@
             
             img.src = fullUrl;
             document.getElementById('downloadLink').href = dlUrl;
-            document.getElementById('modal').style.display = 'flex';
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('modal').scrollTop = 0; // Reset scroll to top
             document.body.style.overflow = 'hidden';
         }
 
@@ -252,13 +252,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // SWIPE GESTURE LOGIC
         const modal = document.getElementById('modal');
         modal.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
         modal.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); }, {passive: true});
 
         function handleSwipe() {
-            const threshold = 50;
+            const threshold = 60;
             if (touchendX < touchstartX - threshold) navPhotos(-1); 
             if (touchendX > touchstartX + threshold) navPhotos(1);  
         }
