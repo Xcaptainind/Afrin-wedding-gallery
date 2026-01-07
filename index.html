@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding Collection | Mubarak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Afrin-Riyaz Wedding | Live Gallery</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -11,8 +11,8 @@
         :root {
             --bg-silk: #FCF9F2;       
             --royal-emerald: #064439; 
-            --metallic-gold: #B8860B; /* Darker Gold for the pattern */
-            --bright-gold: #D4AF37;   /* Brighter Gold for accents */
+            --metallic-gold: #B8860B; 
+            --bright-gold: #D4AF37;   
             --soft-white: #ffffff;
             --glass: rgba(252, 249, 242, 0.96);
         }
@@ -23,158 +23,136 @@
             background-color: var(--bg-silk); 
             color: var(--royal-emerald); 
             font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            padding: 0;
-            line-height: 1.6;
-            
-            /* DARKENED Sacred Geometry Pattern */
-            background-image:  
-                radial-gradient(var(--metallic-gold) 1.2px, transparent 1.2px), 
-                radial-gradient(var(--metallic-gold) 1.2px, var(--bg-silk) 1.2px);
+            margin: 0; padding: 0; line-height: 1.6;
+            /* Darkened Geometric Pattern */
+            background-image: radial-gradient(var(--metallic-gold) 1.2px, transparent 1.2px), radial-gradient(var(--metallic-gold) 1.2px, var(--bg-silk) 1.2px);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
             background-attachment: fixed;
         }
 
-        header {
-            padding: 80px 24px 30px;
-            text-align: center;
-        }
+        header { padding: 60px 24px 20px; text-align: center; }
+        .bismillah { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--bright-gold); margin-bottom: 5px; font-style: italic; }
+        .couple-names { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--royal-emerald); }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 8vw, 2.2rem); font-weight: 400; font-style: italic; margin: 0; letter-spacing: -0.5px; }
+        .divider { width: 100px; height: 1.5px; background: linear-gradient(90deg, transparent, var(--bright-gold), transparent); margin: 15px auto; }
 
-        .bismillah {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--bright-gold);
-            margin-bottom: 10px;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 10vw, 3.8rem);
-            font-weight: 400;
-            font-style: italic;
-            margin: 0;
-            color: var(--royal-emerald);
-        }
-
-        .divider {
-            width: 140px;
-            height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--bright-gold), transparent);
-            margin: 20px auto;
-        }
-
-        .subtitle {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--bright-gold);
-            font-weight: 600;
-        }
-
-        /* STICKY REFRESH PILL */
+        /* STICKY SYNC BAR */
         .sticky-actions {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 0;
-            text-align: center;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            position: sticky; top: 0; z-index: 1000; padding: 15px 0; text-align: center;
+            background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-bottom: 2px solid var(--bright-gold);
         }
 
         #syncBtn {
-            background: var(--royal-emerald);
-            border: 1px solid var(--bright-gold);
-            color: var(--bright-gold);
-            padding: 12px 30px;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 6px 6px 0px var(--bright-gold);
-            font-weight: 600;
+            background: var(--royal-emerald); border: 1px solid var(--bright-gold); color: var(--bright-gold);
+            padding: 10px 24px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; box-shadow: 4px 4px 0px var(--bright-gold); font-weight: 600;
+            transition: all 0.2s;
         }
+        #syncBtn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px; }
 
-        #syncBtn:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px; }
-
+        /* LIGHTWEIGHT GRID */
         #gallery {
-            width: 94%;
-            max-width: 1300px;
-            margin: 30px auto 100px auto;
-            columns: 1; 
-            column-gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 96%;
+            max-width: 1000px;
+            margin: 20px auto 100px auto;
         }
+        @media (min-width: 768px) { #gallery { grid-template-columns: repeat(5, 1fr); gap: 15px; } }
 
-        @media (min-width: 768px) { #gallery { columns: 3; } }
-
-        .photo-card {
-            break-inside: avoid;
-            margin-bottom: 25px;
+        .thumb-card {
+            aspect-ratio: 1 / 1;
             background: var(--soft-white);
-            padding: 12px;
             border: 1px solid var(--bright-gold);
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.03);
-            text-align: center;
-            animation: fadeIn 0.8s ease forwards;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeIn 0.6s ease-out forwards;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .thumb-card img { width: 100%; height: 100%; object-fit: cover; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .photo-card img {
-            width: 100%;
-            display: block;
-            border: 0.5px solid #f0f0f0;
-        }
-
-        .download-btn {
-            display: block;
-            margin-top: 15px;
-            padding: 10px;
-            color: var(--royal-emerald);
-            text-decoration: none;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: 1px solid var(--royal-emerald);
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .download-btn:hover {
-            background: var(--royal-emerald);
-            color: var(--bright-gold);
-        }
-
-        #topBtn {
-            position: fixed;
-            bottom: 30px;
-            right: 25px;
-            background: var(--royal-emerald);
-            color: var(--bright-gold);
-            border: 1px solid var(--bright-gold);
-            width: 45px;
-            height: 45px;
+        /* PRO MODAL VIEW */
+        #modal {
             display: none;
-            z-index: 100;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at center, #085a4b 0%, #03241e 100%);
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
         }
+
+        .spinner {
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top: 3px solid var(--bright-gold);
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            animation: spin 0.8s linear infinite;
+            position: absolute;
+            z-index: 2004;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #modalImg {
+            max-width: 98%; max-height: 78vh;
+            object-fit: contain;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 2005;
+        }
+
+        /* Glassmorphism Navigation */
+        .modal-nav {
+            width: 100%; display: flex; justify-content: space-between;
+            padding: 0 10px; position: absolute; top: 50%; transform: translateY(-50%);
+            z-index: 2010; pointer-events: none;
+        }
+        .nav-arrow {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: var(--bright-gold); border: 1px solid rgba(212, 175, 55, 0.3);
+            width: 50px; height: 50px; border-radius: 50%; font-size: 1.5rem;
+            cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Pro Footer Actions */
+        .modal-footer {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 40px 20px env(safe-area-inset-bottom);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            text-align: center; z-index: 2010;
+        }
+        .modal-dl-btn {
+            background: var(--bright-gold); color: var(--royal-emerald);
+            padding: 14px 30px; text-decoration: none; font-size: 0.75rem;
+            text-transform: uppercase; font-weight: 600; letter-spacing: 2px;
+            display: inline-block; border-radius: 4px;
+        }
+        .close-gallery {
+            display: block; margin: 15px auto 0; background: none; border: none;
+            color: #fff; font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 3px; opacity: 0.6; cursor: pointer;
+        }
+
+        #topBtn { position: fixed; bottom: 30px; right: 20px; background: var(--royal-emerald); color: var(--bright-gold); border: 1px solid var(--bright-gold); width: 40px; height: 40px; display: none; z-index: 100; border-radius: 50%; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="bismillah">Bismillah-ir-Rahman-ir-Rahim</div>
-        <h1>The Wedding Collection</h1>
+        <div class="couple-names">Afrin & Riyaz</div>
+        <h1>Wedding Photo Collection</h1>
         <div class="divider"></div>
-        <p class="subtitle">Barakallahu Lakum</p>
+        <p style="color: var(--bright-gold); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px;">Swipe to browse • Tap to download</p>
     </header>
 
     <div class="sticky-actions">
@@ -183,12 +161,31 @@
 
     <div id="gallery"></div>
 
+    <div id="modal">
+        <div class="spinner" id="modalLoader"></div>
+        <div class="modal-nav">
+            <button class="nav-arrow" onclick="event.stopPropagation(); navPhotos(1)">‹</button>
+            <button class="nav-arrow" onclick="event.stopPropagation(); navPhotos(-1)">›</button>
+        </div>
+        <img id="modalImg" src="" alt="Wedding" 
+             onload="this.style.opacity=1; this.style.transform='scale(1)'; document.getElementById('modalLoader').style.display='none';">
+        <div class="modal-footer">
+            <a id="downloadLink" href="#" class="modal-dl-btn" target="_blank">Download Image</a>
+            <button onclick="closeModal()" class="close-gallery">Close Gallery</button>
+        </div>
+    </div>
+
     <button id="topBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <script>
         const API_KEY = 'AIzaSyAb0XQtAMh9U-Z31kQnsrykU-xCcwOqsuU'; 
         const FOLDER_ID = '1iljrgi2taok3oCwtSFFGMmq9Pn_HFbZF'; 
+        
+        let allPhotos = [];
         let displayedIds = new Set();
+        let currentIndex = 0;
+        let touchstartX = 0;
+        let touchendX = 0;
 
         async function fetchPhotos() {
             const btn = document.getElementById('syncBtn');
@@ -199,38 +196,71 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const gallery = document.getElementById('gallery');
                 
-                if (displayedIds.size === 0 && data.files) gallery.innerHTML = '';
-
                 if (data.files) {
-                    // Filter for only new items, but keep them in Newest-to-Oldest order
-                    const newItems = data.files.filter(file => !displayedIds.has(file.id));
+                    const newItems = data.files.filter(f => !displayedIds.has(f.id));
+                    allPhotos = [...newItems, ...allPhotos];
                     
-                    // We iterate backwards through the "newItems" array so that the 
-                    // absolute newest photo is the LAST one to be inserted at the top.
-                    for (let i = newItems.length - 1; i >= 0; i--) {
-                        const file = newItems[i];
+                    newItems.reverse().forEach(file => {
                         displayedIds.add(file.id);
-                        const card = document.createElement('div');
-                        card.className = 'photo-card';
+                        const thumbCard = document.createElement('div');
+                        thumbCard.className = 'thumb-card';
                         
-                        const viewUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1200`;
-                        const downloadUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
-
-                        card.innerHTML = `
-                            <img src="${viewUrl}" alt="Wedding moment" loading="lazy">
-                            <a href="${downloadUrl}" class="download-btn" target="_blank">Save Memory</a>
-                        `;
+                        // Optimized w400 thumbnails for the grid
+                        const thumbUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`;
                         
-                        // Insert at the absolute top of the gallery
-                        gallery.insertBefore(card, gallery.firstChild);
-                    }
+                        thumbCard.innerHTML = `<img src="${thumbUrl}" alt="Wedding" loading="lazy">`;
+                        thumbCard.onclick = () => {
+                            currentIndex = allPhotos.findIndex(p => p.id === file.id);
+                            updateModal();
+                        };
+                        document.getElementById('gallery').insertBefore(thumbCard, document.getElementById('gallery').firstChild);
+                    });
                 }
                 btn.innerText = "Check for New Moments";
             } catch (e) { 
-                btn.innerText = "Limit Reached - Try later"; 
+                btn.innerText = "Connection Error"; 
             }
+        }
+
+        function updateModal() {
+            const file = allPhotos[currentIndex];
+            // Pro w1600 preview for the Modal
+            const fullUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1600`;
+            const dlUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
+            
+            const img = document.getElementById('modalImg');
+            img.style.opacity = 0;
+            img.style.transform = 'scale(0.98)';
+            document.getElementById('modalLoader').style.display = 'block';
+            
+            img.src = fullUrl;
+            document.getElementById('downloadLink').href = dlUrl;
+            document.getElementById('modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function navPhotos(dir) {
+            currentIndex += dir;
+            if (currentIndex < 0) currentIndex = allPhotos.length - 1;
+            if (currentIndex >= allPhotos.length) currentIndex = 0;
+            updateModal();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // SWIPE GESTURE LOGIC
+        const modal = document.getElementById('modal');
+        modal.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
+        modal.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); }, {passive: true});
+
+        function handleSwipe() {
+            const threshold = 50;
+            if (touchendX < touchstartX - threshold) navPhotos(-1); 
+            if (touchendX > touchstartX + threshold) navPhotos(1);  
         }
 
         window.onscroll = function() {
