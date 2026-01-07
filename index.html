@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding Collection | Mubarak</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-silk: #FCF9F2;       
+            --royal-emerald: #064439; 
+            --metallic-gold: #B8860B; /* Darker Gold for the pattern */
+            --bright-gold: #D4AF37;   /* Brighter Gold for accents */
+            --soft-white: #ffffff;
+            --glass: rgba(252, 249, 242, 0.96);
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body { 
+            background-color: var(--bg-silk); 
+            color: var(--royal-emerald); 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0;
+            line-height: 1.6;
+            
+            /* DARKENED Sacred Geometry Pattern */
+            background-image:  
+                radial-gradient(var(--metallic-gold) 1.2px, transparent 1.2px), 
+                radial-gradient(var(--metallic-gold) 1.2px, var(--bg-silk) 1.2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-attachment: fixed;
+        }
+
+        header {
+            padding: 80px 24px 30px;
+            text-align: center;
+        }
+
+        .bismillah {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--bright-gold);
+            margin-bottom: 10px;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 10vw, 3.8rem);
+            font-weight: 400;
+            font-style: italic;
+            margin: 0;
+            color: var(--royal-emerald);
+        }
+
+        .divider {
+            width: 140px;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--bright-gold), transparent);
+            margin: 20px auto;
+        }
+
+        .subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bright-gold);
+            font-weight: 600;
+        }
+
+        /* STICKY REFRESH PILL */
+        .sticky-actions {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            text-align: center;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--bright-gold);
+        }
+
+        #syncBtn {
+            background: var(--royal-emerald);
+            border: 1px solid var(--bright-gold);
+            color: var(--bright-gold);
+            padding: 12px 30px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 6px 6px 0px var(--bright-gold);
+            font-weight: 600;
+        }
+
+        #syncBtn:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px; }
+
+        #gallery {
+            width: 94%;
+            max-width: 1300px;
+            margin: 30px auto 100px auto;
+            columns: 1; 
+            column-gap: 25px;
+        }
+
+        @media (min-width: 768px) { #gallery { columns: 3; } }
+
+        .photo-card {
+            break-inside: avoid;
+            margin-bottom: 25px;
+            background: var(--soft-white);
+            padding: 12px;
+            border: 1px solid var(--bright-gold);
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.03);
+            text-align: center;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .photo-card img {
+            width: 100%;
+            display: block;
+            border: 0.5px solid #f0f0f0;
+        }
+
+        .download-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            color: var(--royal-emerald);
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--royal-emerald);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: var(--royal-emerald);
+            color: var(--bright-gold);
+        }
+
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 25px;
+            background: var(--royal-emerald);
+            color: var(--bright-gold);
+            border: 1px solid var(--bright-gold);
+            width: 45px;
+            height: 45px;
+            display: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="bismillah">Bismillah-ir-Rahman-ir-Rahim</div>
+        <h1>The Wedding Collection</h1>
+        <div class="divider"></div>
+        <p class="subtitle">Barakallahu Lakum</p>
+    </header>
+
+    <div class="sticky-actions">
+        <button id="syncBtn" onclick="fetchPhotos()">Check for New Moments</button>
+    </div>
+
+    <div id="gallery"></div>
+
+    <button id="topBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        const API_KEY = 'AIzaSyAb0XQtAMh9U-Z31kQnsrykU-xCcwOqsuU'; 
+        const FOLDER_ID = '1iljrgi2taok3oCwtSFFGMmq9Pn_HFbZF'; 
+        let displayedIds = new Set();
+
+        async function fetchPhotos() {
+            const btn = document.getElementById('syncBtn');
+            btn.innerText = "Syncing...";
+            
+            const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'&fields=files(id,name,createdTime)&orderBy=createdTime desc&key=${API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const gallery = document.getElementById('gallery');
+                
+                if (displayedIds.size === 0 && data.files) gallery.innerHTML = '';
+
+                if (data.files) {
+                    // Filter for only new items, but keep them in Newest-to-Oldest order
+                    const newItems = data.files.filter(file => !displayedIds.has(file.id));
+                    
+                    // We iterate backwards through the "newItems" array so that the 
+                    // absolute newest photo is the LAST one to be inserted at the top.
+                    for (let i = newItems.length - 1; i >= 0; i--) {
+                        const file = newItems[i];
+                        displayedIds.add(file.id);
+                        const card = document.createElement('div');
+                        card.className = 'photo-card';
+                        
+                        const viewUrl = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1200`;
+                        const downloadUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
+
+                        card.innerHTML = `
+                            <img src="${viewUrl}" alt="Wedding moment" loading="lazy">
+                            <a href="${downloadUrl}" class="download-btn" target="_blank">Save Memory</a>
+                        `;
+                        
+                        // Insert at the absolute top of the gallery
+                        gallery.insertBefore(card, gallery.firstChild);
+                    }
+                }
+                btn.innerText = "Check for New Moments";
+            } catch (e) { 
+                btn.innerText = "Limit Reached - Try later"; 
+            }
+        }
+
+        window.onscroll = function() {
+            document.getElementById("topBtn").style.display = (window.scrollY > 600) ? "block" : "none";
+        };
+
+        fetchPhotos();
+    </script>
+</body>
+</html>
